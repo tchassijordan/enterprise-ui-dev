@@ -24,6 +24,7 @@ describe('createPerson', () => {
     const person = createPerson('Ada Lovelace');
     expect.hasAssertions();
     // Verify that person is an instance of a Person.
+    expect(person).toBeInstanceOf(Person);
   });
 });
 
@@ -32,12 +33,14 @@ describe('Kanban Board', () => {
     const board = new KanbanBoard('Things to Do');
     expect.hasAssertions();
     // Verify that board.statuses contains "Backlog".
+    expect(board.statuses).toContain('Backlog');
   });
 
   it.todo('should *not* include "Bogus" in board.statuses', () => {
     const board = new KanbanBoard('Things to Do');
     expect.hasAssertions();
     // Verify that board.statuses does not contain "Bogus".
+    expect(board.statuses).not.toContain('Bogus');
   });
 
   it.todo(
@@ -47,6 +50,8 @@ describe('Kanban Board', () => {
       expect.hasAssertions();
       // Use board.addStatus to add a status.
       // Verify that the new status is—in fact—now in board.statuses.
+      board.addStatus('In Review');
+      expect(board.statuses).toContain('In Review');
     },
   );
 
@@ -59,6 +64,9 @@ describe('Kanban Board', () => {
     // by default.
 
     // Verify that the status is no longer in in board.statuses.
+    board.addStatus('In Review');
+    board.removeStatus('In Review');
+    expect(board.statuses).not.toContain('In Review');
   });
 });
 
@@ -67,18 +75,21 @@ describe('Person', () => {
     const person = new Person('Madonna');
     expect.hasAssertions();
     // Verify that person.firstName is correct.
+    expect(person.firstName).toBe('Madonna');
   });
 
   it.todo('will create a person with a first and last name', () => {
     const person = new Person('Madonna Cicone');
     expect.hasAssertions();
     // Verify that person.lastName is correct.
+    expect(person.lastName).toBe('Cicone');
   });
 
   it.todo('will create a person with a first, middle, and last name', () => {
     const person = new Person('Madonna Louise Cicone');
     expect.hasAssertions();
     // Verify that person.middleName is correct.
+    expect(person.middleName).toBe('Louise');
   });
 
   it.todo('will throw if you provide an empty string', () => {
@@ -89,6 +100,7 @@ describe('Person', () => {
     expect.hasAssertions();
 
     // Verify that function above throws.
+    expect(fn).toThrow();
   });
 
   it.todo(
@@ -103,6 +115,7 @@ describe('Person', () => {
       expect.hasAssertions();
 
       // Verify that function above throws the error message above.
+      expect(fn).toThrowError(errorMessage);
     },
   );
 
@@ -115,6 +128,7 @@ describe('Person', () => {
     expect.hasAssertions();
 
     // Verify that john.friends contains paul.
+    expect(john.friends).toContain(paul);
   });
 
   it.todo('will mutually add a friend', () => {
@@ -126,6 +140,7 @@ describe('Person', () => {
     expect.hasAssertions();
 
     // Verify that paul.friends contains john.
+    expect(paul.friends).toContain(john);
   });
 
   it.todo('will remove a friend', () => {
@@ -138,6 +153,7 @@ describe('Person', () => {
     expect.hasAssertions();
 
     // Verify that john.friends does not include paul.
+    expect(john.friends).not.toContain(paul);
   });
 
   it.todo('will mutually remove friends', () => {
@@ -150,6 +166,7 @@ describe('Person', () => {
     expect.hasAssertions();
 
     // Verify that paul.friends does not include john.
+    expect(paul.friends).not.toContain(john);
   });
 });
 
