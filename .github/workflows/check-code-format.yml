@@ -1,0 +1,24 @@
+name: Check code formatting
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  check-code-formatting:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Install Repo"
+        uses: actions/checkout@v4
+      - name: "Install Node"
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - run: npm ci
+        name: "Install project dependencies"
+      - run: npm run check-format
+        name: "Run command to check formatting on files"
